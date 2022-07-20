@@ -20,9 +20,8 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           git config push.autoSetupRemote true
-          git checkout -b release-test-1
-          date > test.txt
-          git add .
+          git checkout -b release-test-2
+          sh replace_version.sh
           git commit -m "Test commit"
           git push
       
