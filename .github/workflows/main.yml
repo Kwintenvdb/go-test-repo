@@ -17,6 +17,8 @@ jobs:
 
       - name: Create release branch
         run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git branch release-test-1
           git commit -m "Test commit"
           git push
