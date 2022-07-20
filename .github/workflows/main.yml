@@ -22,6 +22,7 @@ jobs:
           git config push.autoSetupRemote true
           git checkout -b release-test-2
           sh update_version.sh
+          git add .
           git commit -m "Test commit"
           git push
       
