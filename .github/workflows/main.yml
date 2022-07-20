@@ -23,5 +23,5 @@ jobs:
           date > test.txt
           git add .
           git commit -m "Test commit"
-          git push
+          git push -u
       
