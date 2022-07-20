@@ -18,5 +18,6 @@ jobs:
       - name: Create release branch
         run: |
           git branch release-test-1
+          git commit -m "Test commit"
           git push
       
