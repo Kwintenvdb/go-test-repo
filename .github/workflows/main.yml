@@ -19,9 +19,10 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
+          git config push.autoSetupRemote true
           git checkout -b release-test-1
           date > test.txt
           git add .
           git commit -m "Test commit"
-          git push -u
+          git push
       
