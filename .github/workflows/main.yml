@@ -27,4 +27,4 @@ jobs:
           git add .
           git commit -m "Release $SPRINT_VERSION"
           git tag -a v$SPRINT_VERSION -m "Release tag"
-          git push
+          git push --follow-tags
