@@ -14,7 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
       - name: Create release branch
         env:
           SPRINT_VERSION: ${{ inputs.sprintVersion }}
@@ -28,3 +27,7 @@ jobs:
           git commit -m "Release $SPRINT_VERSION"
           git tag -a v$SPRINT_VERSION -m "Release tag"
           git push --follow-tags
+          
+      - uses: actions/setup-go@v3
+      - name: Update Go modules index
+        run: GOPROXY=proxy.golang.org go list -m github.com/Kwintenvdb/go-test-repo@v$SPRINT_VERSION
