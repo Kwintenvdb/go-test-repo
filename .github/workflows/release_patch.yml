@@ -11,7 +11,8 @@ on:
 
 jobs:
   create-release-patch:
-    # if: contains()
+    # Only run this job on release branches
+    if: startsWith(github.ref_name, 'release/')
 
     runs-on: ubuntu-latest
     
