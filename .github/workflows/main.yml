@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       sprintVersion:
+        description: Sprint version excluding patch, e.g. 1.245
         required: true
         type: string
 
@@ -16,7 +17,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Create release branch
         env:
-          SPRINT_VERSION: ${{ inputs.sprintVersion }}
+          SPRINT_VERSION: ${{ inputs.sprintVersion + '.x' }}
+          SPRINT_VERSION_WITH_PATCH: ${{ inputs.sprintVersion + ".1" }}
         run: |
           [[ ${{ inputs.sprintVersion }} ]] || { echo "Required input sprintVersion not set, exiting."; exit 1; }
           git config user.name github-actions[bot]
@@ -25,10 +27,10 @@ jobs:
           git checkout -b release/$SPRINT_VERSION
           sh update_version.sh
           git add .
-          git commit -m "Release $SPRINT_VERSION"
-          git tag -a v$SPRINT_VERSION -m "Release tag"
+          git commit -m "Release $SPRINT_VERSION_WITH_PATCH"
+          git tag -a v$SPRINT_VERSION_WITH_PATCH -m "Release tag"
           git push --follow-tags
           
       - uses: actions/setup-go@v3
       - name: Update Go modules index
-        run: GOPROXY=proxy.golang.org go list -m github.com/Kwintenvdb/go-test-repo@v${{ inputs.sprintVersion }}
+        run: GOPROXY=proxy.golang.org go list -m github.com/Kwintenvdb/go-test-repo@v$SPRINT_VERSION_WITH_PATCH
