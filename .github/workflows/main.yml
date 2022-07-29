@@ -11,6 +11,8 @@ on:
 
 jobs:
   create-release:
+    if: github.ref_name == 'main'
+
     runs-on: ubuntu-latest
 
     steps:
