@@ -30,7 +30,7 @@ jobs:
           sh update_version.sh
           git add .
           git commit -m "Release $SPRINT_VERSION_WITH_PATCH"
-          git tag -a v$SPRINT_VERSION_WITH_PATCH -m "Release tag"
+          git tag -a submodule/v$SPRINT_VERSION_WITH_PATCH -m "Release tag"
           git push --follow-tags
           
       - uses: actions/setup-go@v3
